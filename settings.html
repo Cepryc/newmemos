@@ -1,0 +1,113 @@
+<?php
+
+	if($_COOKIE['rating']=="") {$rating='m';}else{ $rating=$_COOKIE['rating'];}
+	if($_COOKIE['time']=="") {$time='24h';}else{ $time=$_COOKIE['time'];}
+
+?> 
+
+
+  <div class='modal2' id='modal2' style=''>
+  <br>
+
+
+
+  <form action='settings.php' method='post'>
+
+
+
+	Критерий сортировки постов по популярности: 
+	<hr>
+
+
+		<div style='text-align:center; widht:30%; padding:10px;  display: inline-block;'>
+			Лайки
+			<input class="tgl tgl-light" id="cb1" name='rating' type="radio" value="l" <?php if($rating=="" OR $rating=="l") echo "checked"; ?>/>
+			<label class="tgl-btn" for="cb1"></label>
+		</div>
+
+		<div style='text-align:center; widht:30%; padding:10px;  display: inline-block;'>
+			Репосты
+			<input class="tgl tgl-light" id="cb2" name='rating'  type="radio" value="r" <?php if($rating=="r") echo "checked"; ?>/>
+			<label class="tgl-btn" for="cb2"></label>
+		</div>
+
+		<div style='text-align:center; widht:30%; padding:10px;  display: inline-block;'>
+			Рейтинг
+			<input class="tgl tgl-light" id="cb3" name='rating'  type="radio" value="m" <?php if($rating=="m") echo "checked"; ?>/>
+			<label class="tgl-btn" for="cb3"></label>
+		</div>
+
+	
+	<hr>	
+		Период публикации постов: 
+	<hr>
+	<!--
+	  <div style='text-align:center; widht:30%; padding:10px;  display: inline-block;'>
+		  1ч 
+		  <input class="tgl tgl-light" id="r1" name='time' type="radio" value="1h"  <?php if($time=="1h") echo "checked"; ?>/>
+		  <label class="tgl-btn" for="r1"></label>
+	  </div>
+	-->
+
+	  <div style='text-align:center; widht:30%; padding:10px;  display: inline-block;'>
+			3ч 
+			<input class="tgl tgl-light" id="cb4" name='time' type="radio"  value="3h" <?php if($time=="3h") echo "checked"; ?>/>
+			<label class="tgl-btn" for="cb4"></label>
+		</div>	
+
+		<div style='text-align:center; widht:30%; padding:10px;  display: inline-block;'>
+			6ч 
+			<input class="tgl tgl-light" id="cb5" name='time' type="radio"  value="6h" <?php if($time=="6h") echo "checked"; ?>/>
+			<label class="tgl-btn" for="cb5"></label>
+		</div>	
+
+		
+
+		<div style='text-align:center; widht:30%; padding:10px;  display: inline-block;'>
+			12ч 
+			<input class="tgl tgl-light" id="cb6" name='time' type="radio"  value="12h" <?php if($time=="12h") echo "checked"; ?>/>
+			<label class="tgl-btn" for="cb6"></label>
+		</div>	
+
+		<div style='text-align:center; widht:30%; padding:10px;  display: inline-block;'>
+			24ч 
+			<input class="tgl tgl-light" id="cb7" name='time' type="radio"   value="24h" <?php if($time=="24h" OR $time=="") echo "checked"; ?>/>
+			<label class="tgl-btn" for="cb7"></label>
+		</div>	
+
+
+		<div style='text-align:center; widht:30%; padding:10px;  display: inline-block;'>
+			3д 
+			<input class="tgl tgl-light" id="cb8" name='time' type="radio"  value="3d" <?php if($time=="3d") echo "checked"; ?>/>
+			<label class="tgl-btn" for="cb8"></label>
+		</div>	
+
+
+		<div style='text-align:center; widht:30%; padding:10px;  display: inline-block;'>
+			7д 
+			<input class="tgl tgl-light" id="cb9" name='time' type="radio" value="7d" <?php if($time=="7d") echo "checked"; ?>/>
+			<label class="tgl-btn" for="cb9"></label>
+		</div>	
+
+		<div style='text-align:center; widht:30%; padding:10px;  display: inline-block;'>
+			14д 
+			<input class="tgl tgl-light" id="cb10" name='time' type="radio"  value="14d" <?php if($time=="14d") echo "checked"; ?>/>
+			<label class="tgl-btn" for="cb10"></label>
+		</div>	
+
+		<div style='text-align:center; widht:30%; padding:10px;  display: inline-block;'>
+			30д 
+			<input class="tgl tgl-light" id="cb11" name='time' type="radio"  value="30d" <?php if($time=="30d") echo "checked"; ?>/>
+			<label class="tgl-btn" for="cb11"></label>
+		</div>			
+		
+		<hr>
+		
+		<input type='submit' value='Сохранить' class='button'>
+		
+		<br><br><br>
+	</form>	
+	</div>
+
+
+  
