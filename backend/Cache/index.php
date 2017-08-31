@@ -7,7 +7,6 @@ $db = new Database();
 for($k=0;$k<27;$k++){
 
 $counter = file_get_contents('counter.txt');
-
 $sort_file = file("sort_temp.txt");
 $sort_param = $sort_file[$counter];
 $sort_param_count=count($sort_file)-1;
@@ -61,7 +60,8 @@ if (substr($sort_param, 0, 3) == "30d") {
 }
 
 
-$items = $db->db_select("items", "id,wall_id,gid,date,pdate,attachments,attachment_hash,item_hash,text, text_hash,likes,reposts, rating", "WHERE good_post=1 AND date>'$time' AND ignore_post=0 AND attachment_hash<>'' AND pdate<>'' AND un=1 GROUP BY attachment_hash ORDER BY $rating DESC LIMIT 5000");
+
+$items = $db->db_select("memes_items", "id,wall_id,gid,date,attachments,attachment_hash,item_hash,text,text_hash,likes,reposts, rating", "WHERE good_post=1 AND date>'$time' AND ignore_post=0 AND attachment_hash<>'' AND un=1 GROUP BY attachment_hash ORDER BY $rating DESC LIMIT 5000");
 
 
 $p=0;
@@ -80,7 +80,9 @@ foreach ($items as $item) {
     $p++;
 }
 
-file_put_contents("../HashCleaner/hash_temp/".trim($sort_param).".json", json_encode($save_arr));
+
+//Чистит хэш, не факт что правильно, в любом случае переписывать потом
+//file_put_contents("../HashCleaner/hash_temp/".trim($sort_param).".json", json_encode($save_arr));
 
 
 
@@ -91,7 +93,6 @@ file_put_contents("../HashCleaner/hash_temp/".trim($sort_param).".json", json_en
         $cache[$i]['gid']=$item['gid'];
         $cache[$i]['name']=file_get_contents("../../images/avatars/".$item['gid'].".txt");
         $cache[$i]['date']=date("d.m.Y",$item['date']);
-        $cache[$i]['pdate']=$item['pdate'];
         $cache[$i]['text']=$item['text'];
         $cache[$i]['likes']=$item['likes'];
         $cache[$i]['reposts']=$item['reposts'];
@@ -103,7 +104,7 @@ file_put_contents("../HashCleaner/hash_temp/".trim($sort_param).".json", json_en
         $cache[$i]['hash_text']=$item['text_hash'];
 
         if($i==10){
-            file_put_contents("../../date/".trim($sort_param)."/".$j.".json",json_encode($cache));
+            file_put_contents("../../memes/date/".trim($sort_param)."/".$j.".json",json_encode($cache));
             unset($cache);
             $i=0;
             $j++;
@@ -116,9 +117,9 @@ file_put_contents("../HashCleaner/hash_temp/".trim($sort_param).".json", json_en
 
 //удаляем лишнее, если есть
 for($d=$j; $d<501; $d++){
-    $del_file="../../date/".trim($sort_param)."/".$d.".json";
+    $del_file="../../memes/date/".trim($sort_param)."/".$d.".json";
     if(file_exists($del_file)){
-        unlink("../../date/".trim($sort_param)."/".$d.".json");
+        unlink("../../memes/date/".trim($sort_param)."/".$d.".json");
     }else{
         break;
     }
@@ -131,5 +132,7 @@ file_put_contents("counter.txt", $counter);
 
 
 }
+
+
 
 ?>

@@ -3,14 +3,14 @@ set_time_limit(58);
 
 
 $server_name = $_SERVER['SERVER_NAME'];
-$today = "2017";
+
 
 include_once('../curl.php');
 include_once('../db.php');
 
 
 $db = new Database();
-$items = $db->db_select("items", "attachment_hash, attachments, bad_post", "WHERE attachment_hash<>'' AND good_post=0 AND un=1 GROUP BY attachment_hash order by bad_post ASC, date ASC, RAND() LIMIT 100");
+$items = $db->db_select("memes_items", "attachment_hash, attachments, bad_post", "WHERE attachment_hash<>'' AND good_post=0 AND un=1 GROUP BY attachment_hash order by bad_post ASC, date ASC, RAND() LIMIT 100");
 
 if ($items[0] == "") {
     echo "die";
@@ -32,7 +32,7 @@ foreach ($items as $item) {
     $attachments_count = count($attachments);
 
     for ($i = 0; $i < $attachments_count; $i++) {
-            $save_img = "http://".$server_name."/backend/SaveImage.php?input=".trim($attachments[$i])."&output=".$attachment_hash."_".$i;
+            $save_img = "http://".$server_name."/backend/AttachmentsParser/SaveImage.php?input=".trim($attachments[$i])."&output=".$attachment_hash."_".$i;
             
 			$files_status="";
 			$files_status = get_content($save_img, 5);
@@ -46,11 +46,11 @@ foreach ($items as $item) {
     }
 
         if ($check_attachments_count>=$attachments_count) {			
-                $db->db_update("items", "SET good_post=1, pdate='$today', bad_post=0 WHERE attachment_hash='$attachment_hash'");	
+                $db->db_update("memes_items", "SET good_post=1, bad_post=0 WHERE attachment_hash='$attachment_hash'");	
 				
         }else{
             $bad_post++;
-            $db->db_update("items", "SET bad_post='$bad_post' WHERE attachment_hash='$attachment_hash'");
+            $db->db_update("memes_items", "SET bad_post='$bad_post' WHERE attachment_hash='$attachment_hash'");
 
         }
 

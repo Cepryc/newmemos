@@ -11,7 +11,7 @@ $db = new Database();
 
 
 $id=$_GET['id'];
-$db->db_update("items", "SET ignore_post=1 WHERE id='$id'");
+$db->db_update("memes_items", "SET ignore_post=1 WHERE id='$id'");
 
 
 

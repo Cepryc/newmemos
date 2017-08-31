@@ -5,6 +5,8 @@ var scroll_position;
 var last_scroll_position;
 var temp_id = "";
 
+var DataLoc= window.location.href.replace( /[^\/]+$/g, '' );
+
 var obj_post_id = {};
 var obj_images = {};
 var obj_texts = {};
@@ -59,7 +61,7 @@ setInterval(function () {
 
         var msg = $.ajax({
             type: "GET",
-            url: "date/" + foloder + "/" + page + ".json",
+            url: DataLoc  + "/date/" + foloder + "/" + page + ".json",
             async: false
         }).responseText;
         var date = JSON.parse(msg);
@@ -104,13 +106,13 @@ setInterval(function () {
 
                 for (var j = 0; j < date[i].counters; j++) {
                     if (date[i].hash != "") {
-                        images += "<img class='item_img' src='images/" + date[i].pdate + "/" + date[i].hash + "_" + j + ".jpg'>"
+                        images += "<img class='item_img' src='/images/" + "2017" + "/" + date[i].hash + "_" + j + ".jpg'>"
                     } else {
                         var images = "";
                     }
                     
                     if(date[i].hash!=""){    
-                        images_share += "http://memario.ru/images/" + date[i].pdate + "/" + date[i].hash + "_" + j + ".jpg\n";
+                        images_share += "http://memario.ru/images/" + "2017" + "/" + date[i].hash + "_" + j + ".jpg\n";
                     }    
 
                 }
@@ -227,7 +229,7 @@ setInterval(function () {
             $(".modal_gids_name").html(gid_name);
 
              window.history.pushState('forward', null, '/');
-             window.history.replaceState("","","post.php?id=" + post_id);
+             window.history.replaceState("","",DataLoc + "post.php?id=" + post_id);
              del_id= getUrlParameter('id');
              
         });
@@ -240,7 +242,7 @@ setInterval(function () {
             $(".modal_big_close").hide();
             $("body").removeClass("fixed");
             $(window).scrollTop(last_scroll_position);
-            window.history.replaceState("","","/");
+            window.history.replaceState("","", DataLoc);
 
         });
 
@@ -251,7 +253,7 @@ setInterval(function () {
             $(".modal_big_close").hide();
             $("body").removeClass("fixed");
             $(window).scrollTop(last_scroll_position);
-            window.history.replaceState("","","/");
+            window.history.replaceState("","", DataLoc);
         });
 
 
@@ -343,7 +345,7 @@ $(document).ready(function () {
         $(".info_modal").hide();
         $("body").removeClass("fixed");
         $(window).scrollTop(last_scroll_position);
-        window.history.replaceState("","","/");
+		window.history.replaceState("","", DataLoc);
 
     });
 
@@ -358,7 +360,7 @@ $(document).ready(function () {
             $(".info_modal").hide();
             $("body").removeClass("fixed");
             $(window).scrollTop(last_scroll_position);
-            window.history.replaceState("","","/");
+			window.history.replaceState("","", DataLoc);
 
         }
     });
@@ -381,7 +383,7 @@ $(document).ready(function () {
             $(".info_modal").hide();
             $("body").removeClass("fixed");
             $(window).scrollTop(last_scroll_position);
-            window.history.replaceState("","","/");
+            
         }
       }
     });
